@@ -1,0 +1,28 @@
+@(title: String)(catEntry:(Option[catalog.CatalogEntryMappings.CatalogEntry],Option[catalog.CatalogEntryMappings.BaseItem],Option[catalog.CatalogEntryMappings.ListPrice]))
+
+@main(title) {	
+	@catEntry._1 match{
+		case None => {
+			<li>Catalog entry not found</li>
+		}
+		case Some(e)=>	{
+			<li>@e.id  @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
+			@catEntry._2 match{
+				case None => {
+					<li>Base item not found</li>
+				}
+				case Some(b)=>	{
+					<li>@b.id  @b.itemType @b.partNumber @b.quantityMeasure @b.quantityMultiple</li>
+				}
+			}
+			@catEntry._3 match{
+				case None => {
+					<li>Price not found</li>
+				}
+				case Some(p)=>	{
+					<li>@p.price  @p.currency</li>
+				}
+			}
+		}
+	}
+}
