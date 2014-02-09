@@ -5,6 +5,8 @@ import play.api.mvc._
 import catalog.CatalogEntryMappings._
 import com.typesafe.slick.driver.db2.DB2Driver.simple._
 
+case class CatalogEntryV(catalogEntry:Option[CatalogEntry],baseItem:Option[BaseItem],price:Option[ListPrice],parent:Option[CatalogEntry],children:List[CatalogEntry])
+
 object Application extends Controller {
 
   def index = Action {
@@ -21,7 +23,7 @@ object Application extends Controller {
       val parent = e.flatMap(_.parent)
       val children = e.flatMap(_.children)
       println(parent.selectStatement)
-      (e.firstOption, baseItem, price, parent.firstOption, children.list)
+      CatalogEntryV(e.firstOption, baseItem, price, parent.firstOption, children.list)
     }
     Ok(views.html.catalogEntry("Catalog Entries")(catEntry))
   }

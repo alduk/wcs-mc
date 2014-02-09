@@ -1,14 +1,14 @@
-@(title: String)(catEntry:(Option[catalog.CatalogEntryMappings.CatalogEntry],Option[catalog.CatalogEntryMappings.BaseItem],Option[catalog.CatalogEntryMappings.ListPrice],Option[catalog.CatalogEntryMappings.CatalogEntry],List[catalog.CatalogEntryMappings.CatalogEntry]))
+@(title: String)(catEntry:CatalogEntryV)
 
 @main(title) {	
-	@catEntry._1 match{
+	@catEntry.catalogEntry match{
 		case None => {
 			<li>Catalog entry not found</li>
 		}
 		case Some(e)=>	{
 			<li>@e.id  @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
 			<li>Base item:</li>
-			@catEntry._2 match{
+			@catEntry.baseItem match{
 				case None => {
 					<li>Not found</li>
 				}
@@ -17,7 +17,7 @@
 				}
 			}
 			<li>List price:</li>
-			@catEntry._3 match{				
+			@catEntry.price match{				
 				case None => {
 					<li>Not found</li>
 				}
@@ -26,7 +26,7 @@
 				}
 			}
 			<li>Parent:</li>
-			@catEntry._4 match{
+			@catEntry.parent match{
 				case None => {
 					<li>Not found</li>
 				}
@@ -37,7 +37,7 @@
 				}
 			}			
 			<li>Children:</li>
-			@for(e<- catEntry._5){
+			@for(e<- catEntry.children){
 				<a href='@routes.Application.catalogEntry(e.id)'>
 				<li>@e.id  @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
 				</a>				
