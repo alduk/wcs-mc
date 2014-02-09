@@ -16,26 +16,26 @@ object Application extends Controller {
     val catEntry = db withSession { implicit session =>
       val e = CatalogEntries.filter(_.id === id).take(1)
 
-      val b = e.flatMap(_.baseItem).firstOption
-      val p = e.flatMap(_.listPrice).firstOption
-
-      val q = for {
-        e1 <- CatalogEntries.filter(_.id === id)
-        b1 <- e1.baseItem
-        p1 <- e1.listPrice
-      } yield (e1, b1, p1)
-      println(q.selectStatement)
-      println(q.list)
-      println(q.list.length)
-      (e.firstOption, b, p)
+      val baseItem = e.flatMap(_.baseItem).firstOption
+      val price = e.flatMap(_.listPrice).firstOption
+      val parent = e.flatMap(_.parent)
+      val children = e.flatMap(_.children)
+      println(parent.selectStatement)
+      (e.firstOption, baseItem, price, parent.firstOption, children.list)
     }
     Ok(views.html.catalogEntry("Catalog Entries")(catEntry))
   }
 
-  def catalogEntries(size: Int, skip: Int) = Action {
+  def catalogEntries(size: Int, skip: Int, sku: Option[String]) = Action {
     import config.DB._
     val catEntries = db withSession { implicit session =>
-      CatalogEntries.drop(skip).take(size).list
+      val q = CatalogEntries
+      val r = (sku match {
+        case Some(value) => q.filter(_.partNumber.like(s"%$value%"))
+        case None => q
+      }).drop(skip).take(size)
+      println(r.selectStatement)
+      r.list
     }
     Ok(views.html.catalogEntries("Catalog Entries")(catEntries))
   }

@@ -1,4 +1,4 @@
-@(title: String)(catEntry:(Option[catalog.CatalogEntryMappings.CatalogEntry],Option[catalog.CatalogEntryMappings.BaseItem],Option[catalog.CatalogEntryMappings.ListPrice]))
+@(title: String)(catEntry:(Option[catalog.CatalogEntryMappings.CatalogEntry],Option[catalog.CatalogEntryMappings.BaseItem],Option[catalog.CatalogEntryMappings.ListPrice],Option[catalog.CatalogEntryMappings.CatalogEntry],List[catalog.CatalogEntryMappings.CatalogEntry]))
 
 @main(title) {	
 	@catEntry._1 match{
@@ -7,21 +7,40 @@
 		}
 		case Some(e)=>	{
 			<li>@e.id  @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
+			<li>Base item:</li>
 			@catEntry._2 match{
 				case None => {
-					<li>Base item not found</li>
+					<li>Not found</li>
 				}
 				case Some(b)=>	{
 					<li>@b.id  @b.itemType @b.partNumber @b.quantityMeasure @b.quantityMultiple</li>
 				}
 			}
-			@catEntry._3 match{
+			<li>List price:</li>
+			@catEntry._3 match{				
 				case None => {
-					<li>Price not found</li>
+					<li>Not found</li>
 				}
 				case Some(p)=>	{
 					<li>@p.price  @p.currency</li>
 				}
+			}
+			<li>Parent:</li>
+			@catEntry._4 match{
+				case None => {
+					<li>Not found</li>
+				}
+				case Some(e)=>	{
+					<a href='@routes.Application.catalogEntry(e.id)'>
+					<li>@e.id  @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
+					</a>
+				}
+			}			
+			<li>Children:</li>
+			@for(e<- catEntry._5){
+				<a href='@routes.Application.catalogEntry(e.id)'>
+				<li>@e.id  @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
+				</a>				
 			}
 		}
 	}
