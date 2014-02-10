@@ -1,0 +1,11 @@
+@(title: String)(acActions:List[AcActionV])
+
+@main(title) {
+	@for(a <-acActions){
+		<ul>
+        	<li>        	
+        	@a.policy.id  @a.policy.policyName @a.action.id @a.action.action        	
+        	</li>
+		</ul>
+	}
+}

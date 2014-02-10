@@ -1,0 +1,11 @@
+@(title: String)(acResources:List[AcResourceV])
+
+@main(title) {
+	@for(a <-acResources){
+		<ul>
+        	<li>        	
+        	@a.policy.id  @a.policy.policyName @a.resourceCategory.id @a.resourceCategory.resourceClassName @a.command.interfaceName @a.command.className        	
+        	</li>
+		</ul>
+	}
+}

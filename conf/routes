@@ -3,9 +3,11 @@
 # ~~~~
 
 # Home page
-GET   /                      controllers.Application.index
-GET   /catalogEntries   controllers.Application.catalogEntries(size:Int ?=100, skip:Int ?=0,sku:Option[String])
-GET   /catalogEntry/:id      controllers.Application.catalogEntry(id:Int)
+GET   /                   controllers.Application.index
+GET   /catalog/entries    controllers.CatalogController.entries(size:Int ?=100, skip:Int ?=0,sku:Option[String])
+GET   /catalog/entry/:id   controllers.CatalogController.entry(id:Int)
+GET   /acp/actions        controllers.ACPController.actions(actionName:Option[String])
+GET   /acp/resources      controllers.ACPController.resources(className:Option[String])
 
 # Map static resources from the /public folder to the /assets URL path
-GET   /assets/*file          controllers.Assets.at(path="/public", file)
+GET   /assets/*file       controllers.Assets.at(path="/public", file)
