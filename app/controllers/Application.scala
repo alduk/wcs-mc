@@ -3,9 +3,10 @@ package controllers
 import play.api._
 import play.api.mvc._
 import catalog.CatalogEntryMappings._
-import com.typesafe.slick.driver.db2.DB2Driver.simple._
+import config.Config.driver._
+import config.Config.{ db => configDB }
 
-case class CatalogEntryV(catalogEntry: Option[CatalogEntry], baseItem: Option[BaseItem], price: Option[ListPrice], parent: Option[CatalogEntry], children: List[CatalogEntry], offerPrices: List[(Offer,OfferPrice)])
+case class CatalogEntryV(catalogEntry: Option[CatalogEntry], baseItem: Option[BaseItem], price: Option[ListPrice], parent: Option[CatalogEntry], children: List[CatalogEntry], offerPrices: List[(Offer, OfferPrice)])
 
 object Application extends Controller {
 
@@ -14,8 +15,7 @@ object Application extends Controller {
   }
 
   def catalogEntry(id: Int) = Action {
-    import config.DB._
-    val catEntry = db withSession { implicit session =>
+    val catEntry = configDB withSession { implicit session =>
       val e = CatalogEntries.filter(_.id === id).take(1)
 
       val baseItem = e.flatMap(_.baseItem).firstOption
@@ -30,8 +30,7 @@ object Application extends Controller {
   }
 
   def catalogEntries(size: Int, skip: Int, sku: Option[String]) = Action {
-    import config.DB._
-    val catEntries = db withSession { implicit session =>
+    val catEntries = configDB withSession { implicit session =>
       val q = CatalogEntries
       val r = (sku match {
         case Some(value) => q.filter(_.partNumber.like(s"%$value%"))
