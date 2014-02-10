@@ -1,0 +1,11 @@
+@(title: String)(catEntries:List[catalog.CatalogMappings.Catalog])
+
+@main(title) {
+	@for(e <-catEntries){
+		<ul>
+        	<li>        	
+        	@e.id  @e.memberId @e.identifier @e.description        	
+        	</li>
+		</ul>
+	}
+}

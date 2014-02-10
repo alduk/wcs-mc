@@ -7,10 +7,19 @@ import config.Config.driver._
 import config.Config.{ db => configDB }
 
 import catalog.CatalogEntryMappings._
+import catalog.CatalogMappings._
 
 case class CatalogEntryV(catalogEntry: Option[CatalogEntry], baseItem: Option[BaseItem], price: Option[ListPrice], parent: Option[CatalogEntry], children: List[CatalogEntry], offerPrices: List[(Offer, OfferPrice)])
 
 object CatalogController extends Controller {
+
+  def catalogs = Action {
+    val catalogs = configDB withSession { implicit session =>
+      Catalogs.list
+    }
+    Ok(views.html.catalogs("Catalogs")(catalogs))
+  }
+
   def entry(id: Int) = Action {
     val catEntry = configDB withSession { implicit session =>
       val e = CatalogEntries.filter(_.id === id).take(1)
