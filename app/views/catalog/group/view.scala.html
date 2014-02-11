@@ -1,0 +1,21 @@
+@(title: String)(view:CatalogGroupV)
+
+@main(title) {
+	<ul>
+       	<li>       	
+       		@view.group.id  @view.group.memberId @view.group.identifier @view.group.markForDelete       	        	
+       	</li>
+       	<li>Children:</li>
+       	@for(c<-view.children){
+       		<a href='@routes.CatalogGroupController.view(c.id)'>
+       			<li>@c.id  @c.memberId @c.identifier @c.markForDelete</li>
+       		</a>
+       	}
+       	<li>Entries:</li>
+       	@for(e<-view.entries){
+       		<a href='@routes.CatalogEntryController.view(e.id)'>
+       			<li>@e.id  @e.baseItemId @e.catentryType @e.partNumber @e.manufacturerName @e.manufacturerPartNumber</li>
+       		</a>
+       	}
+	</ul>
+}

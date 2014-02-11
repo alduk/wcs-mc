@@ -1,0 +1,13 @@
+@(title: String)(catGroups:List[com.sysiq.commerce.slick.catalog.CatalogMappings.CatalogGroup])
+
+@main(title) {
+	@for(g <-catGroups){
+		<ul>
+        	<li>
+        	<a href='@routes.CatalogGroupController.view(g.id)'>
+        		@g.id  @g.memberId @g.identifier @g.markForDelete
+        	</a>        	
+        	</li>
+		</ul>
+	}
+}

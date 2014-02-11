@@ -3,12 +3,14 @@
 # ~~~~
 
 # Home page
-GET   /                   controllers.Application.index
-GET   /catalogs    controllers.CatalogController.list
-GET   /catalog/entries    controllers.CatalogController.entries(size:Int ?=100, skip:Int ?=0,sku:Option[String])
-GET   /catalog/entry/:id   controllers.CatalogController.entry(id:Int)
-GET   /acp/actions        controllers.ACPController.actions(actionName:Option[String])
-GET   /acp/resources      controllers.ACPController.resources(className:Option[String])
+GET   /                    controllers.Application.index
+GET   /catalog             controllers.CatalogController.list
+GET   /catalog/entry       controllers.CatalogEntryController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
+GET   /catalog/entry/:id   controllers.CatalogEntryController.view(id:Long)
+GET   /catalog/group       controllers.CatalogGroupController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
+GET   /catalog/group/:id   controllers.CatalogGroupController.view(id:Long)
+GET   /acp/actions         controllers.ACPController.actions(actionName:Option[String])
+GET   /acp/resources       controllers.ACPController.resources(className:Option[String])
 
 # Map static resources from the /public folder to the /assets URL path
-GET   /assets/*file       controllers.Assets.at(path="/public", file)
+GET   /assets/*file        controllers.Assets.at(path="/public", file)
