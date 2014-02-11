@@ -2,6 +2,10 @@
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message)
+    <li><a href='@routes.CatalogController.list'>Catalogs</a></li>
+    <li><a href='@routes.CatalogEntryController.list(100,0,None)'>Catalog Entries</a></li>
+    <li><a href='@routes.CatalogGroupController.list(100,0,None)'>Catalog Groups</a></li>
+    <li><a href='@routes.ACPController.actions(None)'>Access Control Actions</a></li>
+    <li><a href='@routes.ACPController.resources(None)'>Access Control Resources</a></li>
 
 }
