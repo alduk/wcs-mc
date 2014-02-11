@@ -4,7 +4,7 @@
 
 # Home page
 GET   /                   controllers.Application.index
-GET   /catalogs    controllers.CatalogController.catalogs
+GET   /catalogs    controllers.CatalogController.list
 GET   /catalog/entries    controllers.CatalogController.entries(size:Int ?=100, skip:Int ?=0,sku:Option[String])
 GET   /catalog/entry/:id   controllers.CatalogController.entry(id:Int)
 GET   /acp/actions        controllers.ACPController.actions(actionName:Option[String])

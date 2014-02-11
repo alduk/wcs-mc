@@ -2,22 +2,21 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import com.sysiq.commerce.slick.config.Config.driver._
+import com.sysiq.commerce.slick.config.Config.{ db => configDB }
 
-import config.Config.driver._
-import config.Config.{ db => configDB }
-
-import catalog.CatalogEntryMappings._
-import catalog.CatalogMappings._
+import com.sysiq.commerce.slick.catalog.CatalogEntryMappings._
+import com.sysiq.commerce.slick.catalog.CatalogMappings._
 
 case class CatalogEntryV(catalogEntry: Option[CatalogEntry], baseItem: Option[BaseItem], price: Option[ListPrice], parent: Option[CatalogEntry], children: List[CatalogEntry], offerPrices: List[(Offer, OfferPrice)])
 
 object CatalogController extends Controller {
 
-  def catalogs = Action {
+  def list = Action {
     val catalogs = configDB withSession { implicit session =>
       Catalogs.list
     }
-    Ok(views.html.catalogs("Catalogs")(catalogs))
+    Ok(views.html.catalog.list("Catalogs")(catalogs))
   }
 
   def entry(id: Int) = Action {
@@ -32,7 +31,7 @@ object CatalogController extends Controller {
       val offerPrices = e.flatMap(_.offerPrices).list
       CatalogEntryV(e.firstOption, baseItem, price, parent.firstOption, children.list, offerPrices)
     }
-    Ok(views.html.catalogEntry("Catalog Entries")(catEntry))
+    Ok(views.html.catalog.entry("Catalog Entries")(catEntry))
   }
 
   def entries(size: Int, skip: Int, sku: Option[String]) = Action {
@@ -45,6 +44,6 @@ object CatalogController extends Controller {
       println(r.selectStatement)
       r.list
     }
-    Ok(views.html.catalogEntries("Catalog Entries")(catEntries))
+    Ok(views.html.catalog.entries("Catalog Entries")(catEntries))
   }
 }

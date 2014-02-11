@@ -2,11 +2,11 @@ package controllers
 
 import play.api._
 import play.api.mvc._
-import config.Config.driver._
-import config.Config.{ db => configDB }
+import com.sysiq.commerce.slick.config.Config.driver._
+import com.sysiq.commerce.slick.config.Config.{ db => configDB }
 
-import accesscontrol.ACPoliciyMappings._
-import commands.CommandMapings._
+import com.sysiq.commerce.slick.accesscontrol.ACPoliciyMappings._
+import com.sysiq.commerce.slick.commands.CommandMapings._
 
 case class AcActionV(policy: ACPolicy, action: ACAction)
 case class AcResourceV(policy: ACPolicy, resourceCategory: ACResourceCategory, command: Command)
