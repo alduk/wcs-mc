@@ -4,5 +4,4 @@
 /.cache
 /.classpath
 /.project
-/project/project
-/project/target
+/target
