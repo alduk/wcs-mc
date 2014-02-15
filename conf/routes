@@ -11,6 +11,7 @@ GET   /catalog/group       controllers.CatalogGroupController.list(size:Int ?=10
 GET   /catalog/group/:id   controllers.CatalogGroupController.view(id:Long)
 GET   /acp/actions         controllers.ACPController.actions(actionName:Option[String])
 GET   /acp/resources       controllers.ACPController.resources(className:Option[String])
+GET   /user                controllers.MemberController.list
 
 # Map static resources from the /public folder to the /assets URL path
 GET   /assets/*file        controllers.Assets.at(path="/public", file)

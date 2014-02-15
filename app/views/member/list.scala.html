@@ -1,0 +1,11 @@
+@(title: String)(users:List[com.sysiq.commerce.slick.member.MemberMappings.User])
+
+@main(title) {
+	@for(u <-users){
+		<ul>
+        	<li>        	
+        	@u.id  @u.distinguishedName @u.registrationType @u.profileType @u.currency @u.field1 @u.field2 @u.field3      	
+        	</li>
+		</ul>
+	}
+}
