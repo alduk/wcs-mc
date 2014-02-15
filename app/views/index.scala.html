@@ -1,11 +1,18 @@
 @(message: String)
 
 @main("Welcome to Play") {
-
-    <li><a href='@routes.CatalogController.list'>Catalogs</a></li>
-    <li><a href='@routes.CatalogEntryController.list(100,0,None)'>Catalog Entries</a></li>
-    <li><a href='@routes.CatalogGroupController.list(100,0,None)'>Catalog Groups</a></li>
-    <li><a href='@routes.ACPController.actions(None)'>Access Control Actions</a></li>
-    <li><a href='@routes.ACPController.resources(None)'>Access Control Resources</a></li>
-
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="@routes.Application.index">Overview</a></li>
+    		<li><a href='@routes.CatalogController.list'>Catalogs</a></li>
+    		<li><a href='@routes.CatalogEntryController.list(100,0,None)'>Catalog Entries</a></li>
+    		<li><a href='@routes.CatalogGroupController.list(100,0,None)'>Catalog Groups</a></li>
+    		<li><a href='@routes.ACPController.actions(None)'>Access Control Actions</a></li>
+    		<li><a href='@routes.ACPController.resources(None)'>Access Control Resources</a></li>
+          </ul>
+	    </div>
+	  </div>
+	</div>
 }

@@ -1,15 +1,48 @@
 @(title: String)(content: Html)
 
+@import util._
+
 <!DOCTYPE html>
 
-<html>
+<html ng-app>
     <head>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.css">        
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script>
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
-        @content
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="@routes.Application.index">Websphere Commerce Management Center</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="#">Dashboard</a></li>
+	            <li><a href="#">Settings</a></li>
+	            <li><a href="#">Profile</a></li>
+	            <li><a href="#">Help</a></li>
+	          </ul>
+	          <form class="navbar-form navbar-right">
+	            <input type="text" class="form-control" placeholder="Search...">
+	          </form>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-init="lalala='qwerty';d='df';">
+	    	<h2 class="sub-header">@title  @Ang("lalala+d+d+d+d")</h2>
+        	@content
+        </div>
     </body>
 </html>
