@@ -1,11 +1,34 @@
 @(title: String)(users:List[com.sysiq.commerce.slick.member.MemberMappings.User])
 
 @main(title) {
-	@for(u <-users){
-		<ul>
-        	<li>        	
-        	@u.id  @u.distinguishedName @u.registrationType @u.profileType @u.currency @u.field1 @u.field2 @u.field3      	
-        	</li>
-		</ul>
-	}
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+                <tr>
+					<th>#</th>
+					<th>Distingueshed Name</th>
+					<th>Registration Type</th>
+					<th>Profile Type</th>
+					<th>Currency</th>
+					<th>Field 1</th>
+					<th>Field 2</th>
+					<th>Field 3</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for(u <-users){
+					<tr>
+						<td>@u.id</td>
+						<td>@u.distinguishedName</td>
+						<td>@u.registrationType</td>
+						<td>@u.profileType</td>
+						<td>@u.currency</td>
+						<td>@u.fields.field1</td>
+						<td>@u.fields.field2</td>
+						<td>@u.fields.field3</td>					
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 }

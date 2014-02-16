@@ -5,6 +5,7 @@
 # Home page
 GET   /                    controllers.Application.index
 GET   /catalog             controllers.CatalogController.list
+GET   /catalog/json        controllers.CatalogController.listJson
 GET   /catalog/entry       controllers.CatalogEntryController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
 GET   /catalog/entry/:id   controllers.CatalogEntryController.view(id:Long)
 GET   /catalog/group       controllers.CatalogGroupController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
