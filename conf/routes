@@ -3,16 +3,20 @@
 # ~~~~
 
 # Home page
-GET   /                    controllers.Application.index
-GET   /catalog             controllers.CatalogController.list
-GET   /catalog/json        controllers.CatalogController.listJson
-GET   /catalog/entry       controllers.CatalogEntryController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
-GET   /catalog/entry/:id   controllers.CatalogEntryController.view(id:Long)
-GET   /catalog/group       controllers.CatalogGroupController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
-GET   /catalog/group/:id   controllers.CatalogGroupController.view(id:Long)
-GET   /acp/actions         controllers.ACPController.actions(actionName:Option[String])
-GET   /acp/resources       controllers.ACPController.resources(className:Option[String])
-GET   /user                controllers.MemberController.list
+GET   /                          controllers.Application.index
+GET   /catalog                   controllers.CatalogController.list
+GET   /catalog/json              controllers.CatalogController.listJson
+GET   /catalog/entry             controllers.CatalogEntryController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
+GET   /catalog/entry/:id         controllers.CatalogEntryController.view(id:Long)
+GET   /catalog/group             controllers.CatalogGroupController.list(size:Int ?=100, skip:Int ?=0,sku:Option[String])
+GET   /catalog/group/:id         controllers.CatalogGroupController.view(id:Long)
+GET   /acp/actions               controllers.ACPController.actions(actionName:Option[String])
+GET   /acp/resources             controllers.ACPController.resources(className:Option[String])
+GET   /user                      controllers.MemberController.list
+GET   /pagelayouts               controllers.PageLayoutController.layouts
+GET   /pagelayouts/:id           controllers.PageLayoutController.view(id: Long)
+GET   /pagelayouts/:id/widgets   controllers.PageLayoutController.widgetsById(id: Long)
+GET   /pagelayouts/widgets       controllers.PageLayoutController.widgets
 
 # Map static resources from the /public folder to the /assets URL path
-GET   /assets/*file        controllers.Assets.at(path="/public", file)
+GET   /assets/*file              controllers.Assets.at(path="/public", file)

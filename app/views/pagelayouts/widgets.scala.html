@@ -1,0 +1,30 @@
+@(title: String)(widgets:List[com.sysiq.commerce.slick.pagelayouts.PageLayoutsMappings.Widget])
+
+@main(title) {
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+                <tr>
+					<th>#</th>
+					<th>Layout #</th>
+					<th>definition #</th>
+					<th>Admin Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				@for(w <-widgets){
+					<tr>
+						<td>@w.id</td>
+						<td>
+						<a href='@routes.PageLayoutController.view(w.layoutId)'>
+							@w.layoutId
+						</a>
+						</td>
+						<td>@w.defId</td>
+						<td>@w.adminName</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
